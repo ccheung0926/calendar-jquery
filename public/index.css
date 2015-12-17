@@ -25,3 +25,7 @@ table, th,td{
 #date tr td{
   text-align: right;
 }
+
+.today{
+  background-color: yellow;
+}
