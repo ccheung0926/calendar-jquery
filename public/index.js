@@ -56,10 +56,12 @@ $(document).ready(function(){
     var firstDayOfMonth = firstDay.getDay();
     var year = firstDay.getFullYear();
     var month = firstDay.getMonth() + 1;
+    var lastMonth = moment(2015+"-"+ (month - 1), "YYYY-MM").daysInMonth();
     if(firstDayOfMonth == 0){
       firstDayOfMonth = 7;
     }
     var daysInNextMonth = 42 - (firstDayOfMonth - 1) - lastDay;
+    var daysInPrevMonth = 42 - lastDay - daysInNextMonth;
     var $theFirst =   $("#"+firstDayOfMonth);
     var today = moment().format("Do").slice(0,-2);
     $theFirst.append(1);
@@ -76,6 +78,10 @@ $(document).ready(function(){
     for(var j = 1; j <= daysInNextMonth ; j++){
       var id = 42 - daysInNextMonth + j;
       $("#"+id).addClass("nextAndPrev").append(j);
+    }
+    for(var k = daysInPrevMonth; k > 0; k--){
+      $("#"+k).addClass("nextAndPrev").append(lastMonth);
+      lastMonth--;
     }
   }
   calendar(startOfMonth, endOfMonth);
