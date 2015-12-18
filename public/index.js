@@ -6,7 +6,7 @@ $(document).ready(function(){
   var currentMonth = moment().format("MM");
   var yearCounter = currentYear;
   var startOfMonth = moment().startOf("month")._d;
-  var endOfMonth = moment(currentYear+"-"+ monthInNum, "YYYY-MM").daysInMonth();
+  var endOfMonth = moment(currentYear+"-"+ (monthInNum+1), "YYYY-MM").daysInMonth();
 
   var $month = $("#currentMonth");
   var $year = $("#currentYear");
@@ -16,7 +16,6 @@ $(document).ready(function(){
   $month.append(months[monthInNum]);
   $year.append(" "+currentYear);
   var start = moment([2016, 0]);
-  console.log(moment(start).startOf('month'), "heyy");
 
   $previousMonth.on("click", function(e){
     if(monthInNum - 1 <= 1){
@@ -46,6 +45,7 @@ $(document).ready(function(){
     var firstDay = moment([year, month])._d;
     var lastDay = moment(year+"-"+(month+1), "YYYY-MM").daysInMonth();
     $("td").removeClass("today");
+    $("td").removeClass("nextAndPrev");
     $(".dateContent").empty();
     $month.empty().append(months[month]);
     $year.empty().append(" " + yearCounter);
@@ -59,8 +59,8 @@ $(document).ready(function(){
     if(firstDayOfMonth == 0){
       firstDayOfMonth = 7;
     }
+    var daysInNextMonth = 42 - (firstDayOfMonth - 1) - lastDay;
     var $theFirst =   $("#"+firstDayOfMonth);
-    console.log($theFirst, firstDayOfMonth);
     var today = moment().format("Do").slice(0,-2);
     $theFirst.append(1);
     for(var i = 1; i < lastDay; i++){
@@ -72,6 +72,10 @@ $(document).ready(function(){
       else{
         $("#"+id).append(date);
       }
+    }
+    for(var j = 1; j <= daysInNextMonth ; j++){
+      var id = 42 - daysInNextMonth + j;
+      $("#"+id).addClass("nextAndPrev").append(j);
     }
   }
   calendar(startOfMonth, endOfMonth);

@@ -30,3 +30,7 @@ table, th,td{
 .today{
   background-color: yellow;
 }
+
+.nextAndPrev{
+  background-color: #969696;
+}
